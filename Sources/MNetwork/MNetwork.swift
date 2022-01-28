@@ -4,7 +4,7 @@ import Combine
 /// Network class is singleton instance wich adds open api to ensure the all third part calls wrapped to create rerquest from here
 @available(OSX 10.15, *)
 @available(iOS 13.0, *)
-class MNetWork {
+public class MNetWork {
 
     private init() {}
 
