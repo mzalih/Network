@@ -26,7 +26,7 @@ public class MNetWork {
     // private instance
     private let networkingLayer: APINetwork
     
-    init(_ session: URLSession = .shared){
+    public init(_ session: URLSession = .shared){
        networkingLayer = APINetwork(session: session)
     }
     /// If you have to use a body from a class data
