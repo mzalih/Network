@@ -25,16 +25,19 @@ public class SharedMNetWork {
 public class MNetWork {
     // private instance
     private let networkingLayer: APINetwork
+    public var baseurl:String
     
-    public init(_ session: URLSession = .shared){
+    public init(_ session: URLSession = .shared,
+                baseurl:String = ""){
        networkingLayer = APINetwork(session: session)
+        self.baseurl = baseurl
     }
     /// If you have to use a body from a class data
     /// or struct use this method
     
     public func request<ResponseDecodable: Decodable,
                         RequestEncodable: Encodable>(
-        _ url: String,
+        url: String? = nil,
         path: String = "",
         method: HTTPMethod = .get,
         parameters: [String: Any]? = nil,
@@ -49,7 +52,7 @@ public class MNetWork {
             requestBody = try? NetworkBody(object: body, encoding: encoding )
         }
         // invoke the request with request body
-        return self.request(url, path: path,
+        return self.request(url: url, path: path,
                        method: method,
                        parameters: parameters,
                        requestBody: requestBody,
@@ -59,8 +62,8 @@ public class MNetWork {
     }
     // If you have to use a body from a diction0ry
     // use the this method
-    public   func request<ResponseDecodable: Decodable>(
-        _ url: String,
+    public  func request<ResponseDecodable: Decodable>(
+        url: String? = nil,
         path: String = "",
         method: HTTPMethod = .get,
         parameters: [String: Any]? = nil,
@@ -77,7 +80,7 @@ public class MNetWork {
             requestBody = try? NetworkBody(dictionary: body, encoding: encoding )
         }
         // invoke the request with request body
-        return self.request(url, path: path,
+        return self.request(url: url, path: path,
                        method: method,
                        parameters: parameters,
                        requestBody: requestBody,
@@ -89,7 +92,7 @@ public class MNetWork {
     // If you have to use a custom network body
     // use the this method
     public  func request<ResponseDecodable: Decodable>(
-        _ url: String,
+        url: String? = nil,
         path: String = "",
         method: HTTPMethod = .get,
         parameters: [String: Any]? = nil,
@@ -99,7 +102,7 @@ public class MNetWork {
         ) -> AnyPublisher<ResponseDecodable, Error> {
 
         // Create an APi request out network client can use
-        let request  = APIRequest(url: url,
+        let request  = APIRequest(url: url ?? baseurl,
                                   path: path,
                                   method: method,
                                   parameters: parameters,
