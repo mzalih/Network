@@ -17,6 +17,10 @@ public protocol TestableAPi{
 public struct TestPaths{
     let url:String
     let file:String
+    public init(url:String,file:String ){
+        self.url = url
+        self.file = file
+    }
 }
 
 extension AddLocalTestFile{
