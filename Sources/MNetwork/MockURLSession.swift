@@ -66,12 +66,10 @@ extension URLSession{
         responseData:Data?,
         statusCode:Int = 200,
         httpVersion:String? = nil,
-        headerFields: [String : String]? = nil) ->  [URL?: (error: Error?, data: Data?, response: HTTPURLResponse?)]{
+        headerFields: [String : String]? = nil) ->  (error: Error?, data: Data?, response: HTTPURLResponse?){
         
         let response = HTTPURLResponse(url: URL(string: urlString)!, statusCode: 200, httpVersion: nil, headerFields: nil)
-        let url = URL(string: urlString)
-       
-        return [url: (nil, responseData, response)]
+        return (nil, responseData, response)
     }
     
 }
