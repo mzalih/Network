@@ -106,6 +106,7 @@ public class MNetWork {
                                   path: path,
                                   method: method,
                                   parameters: parameters,
+                                  headers: headers,
                                   body: requestBody)
 
         // use the shared networklayer to call the api
